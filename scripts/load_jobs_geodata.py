@@ -1,8 +1,6 @@
 import os
 import argparse
-import json
 import sys
-from datetime import datetime
 
 import pandas as pd
 from sqlalchemy import create_engine, text
@@ -105,7 +103,6 @@ def transform_to_gdf(df: pd.DataFrame) -> gpd.GeoDataFrame:
 
 
 def select_and_rename(gdf: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
-    cols = {}
     # Map CSV columns to target schema names if available
     mapping = {
         "id": "source_id",
@@ -177,4 +174,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
