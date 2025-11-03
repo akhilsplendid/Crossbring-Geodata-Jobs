@@ -1,0 +1,12 @@
+{
+  "filters": [
+    { "type": "occupationField", "value": "apaJ_2ja_LuF" }
+  ],
+  "fromDate": null,
+  "order": "relevance",
+  "maxRecords": 25,
+  "startIndex": 0,
+  "toDate": "2025-10-29T22:59:57.764Z",
+  "source": "pb"
+}
+
