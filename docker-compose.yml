@@ -30,6 +30,16 @@ services:
     ports:
       - "8080:8080"
 
+  dashboard:
+    build: .
+    container_name: geodata_jobs_dashboard
+    depends_on:
+      - db
+    environment:
+      PG_DATABASE_URL: postgresql+psycopg2://postgres:postgres@db:5432/jobsdb
+    ports:
+      - "8501:8501"
+    command: ["streamlit", "run", "streamlit_app.py", "--server.port", "8501", "--server.address", "0.0.0.0"]
+
 volumes:
   geodata_jobs_pgdata:
-

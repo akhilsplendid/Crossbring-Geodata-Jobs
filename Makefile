@@ -5,7 +5,7 @@ DB_SVC := db
 DB_USER := postgres
 DB_NAME := jobsdb
 
-.PHONY: up down logs psql init-db analytics-sql fetch-af load-csv map status smoke demo-csv demo-af dashboard
+.PHONY: up down logs psql init-db analytics-sql fetch-af load-csv map status smoke demo-csv demo-af dashboard dash-up dash-down dash-logs
 
 up:
 	$(DC) -f docker-compose.yml up -d
@@ -47,3 +47,12 @@ demo-af: up init-db fetch-af analytics-sql smoke map
 
 dashboard:
 	streamlit run streamlit_app.py --server.port 8501
+
+dash-up:
+	$(DC) -f docker-compose.yml up -d dashboard
+
+dash-down:
+	$(DC) -f docker-compose.yml stop dashboard
+
+dash-logs:
+	$(DC) -f docker-compose.yml logs -f dashboard

@@ -61,3 +61,10 @@ Dashboard
 - Run: make dashboard
 - Open: http://localhost:8501
 
+
+Containerized Dashboard
+- Build & run with Docker: make dash-up
+- Logs: make dash-logs
+- Stop: make dash-down
+- Open: http://localhost:8501
+
