@@ -28,6 +28,6 @@ RUN pip install --upgrade pip && pip install -r /app/requirements.txt
 COPY . /app
 
 EXPOSE 8501
-
+RUN chmod +x /app/docker/entrypoint.sh
+ENTRYPOINT ["/app/docker/entrypoint.sh"]
 CMD ["streamlit", "run", "streamlit_app.py", "--server.port", "8501", "--server.address", "0.0.0.0"]
-

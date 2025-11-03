@@ -37,6 +37,10 @@ services:
       - db
     environment:
       PG_DATABASE_URL: postgresql+psycopg2://postgres:postgres@db:5432/jobsdb
+      BOOTSTRAP_AF: "true"
+      AF_OCCUPATION_FIELD: "apaJ_2ja_LuF"
+      AF_PAGES: "5"
+      AF_MAX_RECORDS: "25"
     ports:
       - "8501:8501"
     command: ["streamlit", "run", "streamlit_app.py", "--server.port", "8501", "--server.address", "0.0.0.0"]

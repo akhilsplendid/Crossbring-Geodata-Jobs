@@ -56,3 +56,7 @@ dash-down:
 
 dash-logs:
 	$(DC) -f docker-compose.yml logs -f dashboard
+
+dash-up-af:
+	$(DC) -f docker-compose.yml up -d db
+	$(DC) -f docker-compose.yml up -d dashboard

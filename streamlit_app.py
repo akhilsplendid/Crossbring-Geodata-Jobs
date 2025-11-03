@@ -3,6 +3,9 @@ import math
 import pandas as pd
 import streamlit as st
 from sqlalchemy import create_engine, text
+import folium
+from folium.plugins import MarkerCluster
+from streamlit.components.v1 import html
 
 
 @st.cache_resource(show_spinner=False)
@@ -99,8 +102,16 @@ def main():
         df = query_jobs(engine, keyword, mun_sel, lat, lon, radius, limit)
         st.success(f"Fetched {len(df):,} rows")
         if not df.empty:
-            # Map and table
-            st.map(df[["lat", "lon"]], zoom=6)
+            # Nearby folium map centered on provided location (if radius > 0)
+            if radius and lat and lon:
+                m = folium.Map(location=[lat, lon], zoom_start=7)
+                folium.Circle(location=[lat, lon], radius=int(radius * 1000), color="#1B365D", fill=True, fill_opacity=0.1).add_to(m)
+                mc = MarkerCluster().add_to(m)
+                for _, r in df.iterrows():
+                    folium.Marker([r["lat"], r["lon"]], popup=f"{r['title']}<br/>{r.get('company','')}<br/>{r.get('municipality','')}").add_to(mc)
+                html(m._repr_html_(), height=500)
+            else:
+                st.map(df[["lat", "lon"]], zoom=6)
             st.dataframe(df)
         else:
             st.info("No results. Adjust filters and try again.")
@@ -111,4 +122,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
