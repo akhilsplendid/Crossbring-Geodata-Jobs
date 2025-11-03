@@ -56,3 +56,8 @@ Verification / Demo
   - `make analytics-sql` then try `SELECT * FROM nearby_jobs(18.0686, 59.3293, 50000) LIMIT 10;`
   - Open Adminer at http://localhost:8080 (server: db, user: postgres, pass: postgres, db: jobsdb)
   - Run `python scripts/smoke_test.py` to print PostGIS version, row counts, and a nearby sample.
+
+Dashboard
+- Run: make dashboard
+- Open: http://localhost:8501
+
