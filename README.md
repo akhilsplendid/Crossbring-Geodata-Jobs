@@ -1,4 +1,4 @@
-[![CI](https://github.com/akhilsplendid/Crossbring-Geodata-Jobs/actions/workflows/ci.yml/badge.svg)](https://github.com/akhilsplendid/Crossbring-Geodata-Jobs/actions/workflows/ci.yml)
+[![CI](https://github.com/akhilsplendid/Crossbring-Geodata-Jobs/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/akhilsplendid/Crossbring-Geodata-Jobs/actions/workflows/ci.yml?query=branch%3Amaster)
 
 Swedish Job Market Geodata Platform
 
