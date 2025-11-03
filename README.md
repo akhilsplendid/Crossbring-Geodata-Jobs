@@ -47,3 +47,12 @@ Notes
 - Coordinates are validated to be within [-180..180] for lon and [-90..90] for lat.
 - Invalid or missing coordinates are skipped (count is logged).
 - Geometry stored as `geometry(Point,4326)`. Use `::geography` cast for meter-based distances.
+
+Verification / Demo
+- One-command CSV demo: `make demo-csv` (starts DB, initializes schema, loads CSV, creates analytics, runs smoke test, writes `map.html`).
+- One-command AF demo: `make demo-af` (fetches live AF jobs instead of CSV).
+- Manual checks:
+  - `make status` (containers up), `make psql` then run `SELECT COUNT(*) FROM jobs;` and `SELECT COUNT(*) FROM jobs WHERE location IS NOT NULL;`
+  - `make analytics-sql` then try `SELECT * FROM nearby_jobs(18.0686, 59.3293, 50000) LIMIT 10;`
+  - Open Adminer at http://localhost:8080 (server: db, user: postgres, pass: postgres, db: jobsdb)
+  - Run `python scripts/smoke_test.py` to print PostGIS version, row counts, and a nearby sample.

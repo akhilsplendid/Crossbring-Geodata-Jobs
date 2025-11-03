@@ -5,7 +5,7 @@ DB_SVC := db
 DB_USER := postgres
 DB_NAME := jobsdb
 
-.PHONY: up down logs psql init-db fetch-af load-csv map status
+.PHONY: up down logs psql init-db analytics-sql fetch-af load-csv map status smoke demo-csv demo-af
 
 up:
 	$(DC) -f docker-compose.yml up -d
@@ -25,6 +25,9 @@ psql:
 init-db:
 	$(DC) -f docker-compose.yml exec -T $(DB_SVC) psql -U $(DB_USER) -d $(DB_NAME) -f /scripts/01_init_postgis.sql
 
+analytics-sql:
+	$(DC) -f docker-compose.yml exec -T $(DB_SVC) psql -U $(DB_USER) -d $(DB_NAME) -f /scripts/02_analytics_queries.sql
+
 # Requires Python venv on host and PG_DATABASE_URL env var
 fetch-af:
 	python scripts/fetch_af_jobs.py --occupation-field apaJ_2ja_LuF --pages 5 --max-records 25
@@ -35,3 +38,9 @@ load-csv:
 map:
 	python viz/map_sample.py --out map.html --limit 2000
 
+smoke:
+	python scripts/smoke_test.py
+
+demo-csv: up init-db load-csv analytics-sql smoke map
+
+demo-af: up init-db fetch-af analytics-sql smoke map
